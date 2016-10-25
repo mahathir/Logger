@@ -39,13 +39,13 @@
             int suspendTime;
 
             limitRate =
-                int.TryParse(ConfigurationManager.AppSettings[Constants.Config.RateLimit], out limitRate) ?
+                int.TryParse(ConfigurationManager.AppSettings[Constants.Config.RATE_LIMIT], out limitRate) ?
                 limitRate : 60;
             rateLimitTime =
-                long.TryParse(ConfigurationManager.AppSettings[Constants.Config.RateLimitTime], out rateLimitTime) ?
+                long.TryParse(ConfigurationManager.AppSettings[Constants.Config.RATE_LIMIT_TIME], out rateLimitTime) ?
                 rateLimitTime : 60;
             suspendTime =
-                int.TryParse(ConfigurationManager.AppSettings[Constants.Config.SuspendTime], out suspendTime) ?
+                int.TryParse(ConfigurationManager.AppSettings[Constants.Config.SUSPEND_TIME], out suspendTime) ?
                 suspendTime : 300;
 
             this.rateRepo.Create(

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossoverLogger.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -12,8 +13,6 @@ namespace CrossoverLogger.Api
     public class CustomControllerSelector : DefaultHttpControllerSelector
     {
         private HttpConfiguration _config;
-        private const string HEADER_NAME = "X-CrossoverLogger-Version";
-        private const string DEFAULT_VERSION = "V1";
 
         public CustomControllerSelector(HttpConfiguration config) : base(config)
         {
@@ -39,7 +38,7 @@ namespace CrossoverLogger.Api
                 }
                 else
                 {
-                    controllerName = string.Concat(defaultControllerName, DEFAULT_VERSION);
+                    controllerName = string.Concat(defaultControllerName, Constants.Others.API_DEFAULT_VERSION);
                     if (controllers.TryGetValue(controllerName, out controllerDescriptor))
                     {
                         return controllerDescriptor;
@@ -56,9 +55,9 @@ namespace CrossoverLogger.Api
 
         private string GetVersionFromHeader(HttpRequestMessage request)
         {
-            if (request.Headers.Contains(HEADER_NAME))
+            if (request.Headers.Contains(Constants.HttpHeader.API_VERSION))
             {
-                var versionHeader = request.Headers.GetValues(HEADER_NAME).FirstOrDefault();
+                var versionHeader = request.Headers.GetValues(Constants.HttpHeader.API_VERSION).FirstOrDefault();
                 if (versionHeader != null)
                 {
                     return versionHeader;
