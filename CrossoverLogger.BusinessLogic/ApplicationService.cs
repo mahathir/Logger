@@ -26,7 +26,8 @@
         {
             var result = new ServiceResult<Application>();
 
-            ValidateNullWhiteSpace(app.DisplayName, result, nameof(Application.DisplayName), EntitiesResx.Application);
+            ValidateNullWhiteSpace(app.DisplayName, result, nameof(Application.DisplayName), 
+                nameof(Application.DisplayName));
             if (result.ErrorMessages.Count > 0) return result;
 
             app.ApplicationId = Guid.NewGuid().ToString().Replace("-", "");

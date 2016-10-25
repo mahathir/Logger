@@ -1,16 +1,14 @@
-﻿using CrossoverLogger.Commons.Translation;
-using CrossoverLogger.DTO;
-using CrossoverLogger.IBusinessLogic;
-using CrossoverLogger.IDataAccess;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CrossoverLogger.BusinessLogic
+﻿namespace CrossoverLogger.BusinessLogic
 {
+    using Commons.Translation;
+    using DTO;
+    using IBusinessLogic;
+    using IDataAccess;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity.Validation;
+    using System.Linq;
+
     public abstract class BaseService<TEntity, TKey> where TEntity : class
     {
         private IRepository<TEntity, TKey> repo;
@@ -69,6 +67,8 @@ namespace CrossoverLogger.BusinessLogic
                 {
                     result.ErrorMessages.Add(msg.Key, string.Join(Environment.NewLine, msg.Value));
                 }
+
+                result.ErrorMessages.Add("Error", ex.Message);
             }
         }
     }
